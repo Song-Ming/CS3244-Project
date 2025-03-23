@@ -1,4 +1,4 @@
-# CS3244 Project: Identifying 8 Types of Weeds
+# CS3244 Group 2 Project: Identifying 8 Types of Weeds
 
 ## Group Members
 <ul>
