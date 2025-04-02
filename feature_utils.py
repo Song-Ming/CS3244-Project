@@ -5,8 +5,8 @@ from skimage.feature import hog, local_binary_pattern
 # Shape
 def extract_hog(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    features, _ = hog(gray, pixels_per_cell=(16, 16), cells_per_block=(2, 2),
-                      orientations=9, block_norm='L2-Hys', visualize=True)
+    features, _= hog(gray, pixels_per_cell=(32, 32), cells_per_block=(2, 2),
+                  orientations=6, block_norm='L2-Hys', visualize=True)
     return features
 
 # Colour
