@@ -39,12 +39,6 @@ Our approach to solving this problem involves the following key steps:
 To evaluate model performance, we will use the following metrics:
 <ul>
   <li> Accuracy: The overall classification accuracy of the model. </li>
-  <li> F1 Score: The harmonic mean of precision and recall, especially useful given the class imbalance in the dataset. </li>
-  <li> Training Time: Time taken for model training, as real-time weed detection is essential. </li>
+  <li> F1 Score: The harmonic mean of precision and recall for each class, especially useful given the class imbalance in the dataset. </li>
+  <li> Training Time: Time taken for model inference, as real-time weed detection is essential. </li>
 </ul>
-We will use micro-averaging to handle the class imbalance and ensure fair evaluation across multiple classes.
-
-## Resources
-<ol>
-  <li> PyTorch Documentation on Transformation and Augmentation: https://pytorch.org/vision/main/transforms.html </li>
-</ol>
