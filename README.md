@@ -12,12 +12,12 @@
 
 
 ## Project Overview
-This project aims to develop a system for automated weed detection using image classification techniques to identify 8 types of weeds native to Australia. The dataset contains images of these weeds, as well as images with no weeds, and each image is labeled accordingly. <br>
+This project aims to use machine learning techniques to automatically identify 8 types of weeds native to Australia. The dataset contains images of these weeds, as well as images with no weeds, and each image is labeled accordingly. <br>
 
 The project will explore both deep learning (Transformer and CNN) and traditional machine learning approaches (SVM, Random Forest, KNN) for classifying images into respective weed categories.
 
 ## Dataset
-The dataset used for this project contains images of 8 different types of weeds, as well as images where no weeds are present. The dataset is publicly available and comes from a research paper published by Scientific Reports. <br>
+The dataset used for this project contains images of 8 different types of weeds, as well as images where no weeds are present. The dataset is publicly available and comes from the DeepWeeds research paper published by Scientific Reports. <br>
 
 <ul>
   <li> Dataset Source: https://github.com/AlexOlsen/DeepWeeds </li>
