@@ -39,24 +39,39 @@ To evaluate model performance, we will use the following metrics:
 <ul>
   <li> Accuracy: The overall classification accuracy of the model. </li>
   <li> F1 Score: The harmonic mean of precision and recall for each class, especially useful given the class imbalance in the dataset. </li>
-  <li> Training Time: Time taken for model inference, as real-time weed detection is essential. </li>
+  <li> Inference Time: Time taken for model inference, as real-time weed detection is essential. </li>
 </ul>
 
 ## Deep Learning
 ### Data Preparation
 <ul>
-  <li> Directory Setup follows the structure as defined in directory_order file. </li>
-  <li> Script: Process Data.ipynb 
-    <li> Splits the dataset into training, validation and test sets with a fixed random seed for reproducibility. </li>
-    <li> Applies offline data augmentation using Albumentations. </li>
-    <li> Saves the processed data into: 
-      <li> Weeds/Sets </li>
-      <li> Weeds/Labels </li>
-    </li>
-</li>
+  <li> The directory structure follows the layout defined in directory_order file. </li>
+  <li> The Process Data.ipybnb file splits the dataset into training, validation, and test sets using a fixed seeed for reproduciblity. </li>
+  <li> Offline data augmentation (Albumentations) is applied during pre-processing. </li>
+  <li> The resulting sets are saved in Weeds/Sets for image data, and Weeds/Labels for class labels. </li>
 </ul>
 
-Place the images, labels and ipynb files according to the Directory order file. Process Data splits and augments the data with a set seed and saves the resulting training, validation and test sets in Weeds/Sets and Weeds/Labels. Swin.ipynb and Convnext.ipynb contain the training and evaluation of the Swin Transformer small and Convnext small models respectively. To speed up the process, the entire dataset is loaded into memory so the program will take about 18-20 GB of RAM. The records folder contains the training and validation loss of each epoch of training for the models. The optimal weights for each model is stored on google drive at 
-https://drive.google.com/drive/folders/1KAnvMIL_II11WkVqymGF3nXKtiPBoY2i?usp=drive_link.
+### Model Training & Evaluation
+<ul>
+  <li> Swin.ipynb trains and evaluates the Swin Transformer Small model. </li>
+  <li> Convnext.ipynb trains and evaluates the Convnext Small model. </li>
+</ul>
 
-For both Swin and Convnext, the pretrained (imagenet) pytorch implementations were used as a base for finetuning. The classifier was replaced by a MLP with 9 output features representing the 9 classes. Most of the model was frozen except for the upper few layers. The total number of trainable parameters for both was around 14 million out of a total of 49 million. Swin Transformer achieved 96.23% top-1 accuracy while Convnext achieved 95.43% top-1 accuracy on the test set. The lowest F1 score for Swin was 0.9082 while the lowest F1 score for Convnext was 0.8609, both for class Chinee Apple. Total inference time at batch size 30 for 720 images was 2.516s and 1.882s respectively.
+To speed up the process, the full dataset is loaded into memory (~ 18 - 20 GB RAM usage).
+
+### Training Records
+The records/ folder contains training and validation loss for each epoch for both models.
+
+### Model Weights
+The optimial trained model weights are stored on Google Drive: https://drive.google.com/drive/folders/1KAnvMIL_II11WkVqymGF3nXKtiPBoY2i?usp=drive_link.
+
+### Model Setup
+We used pre-trained ImageNet Pytorch implementations of Swin Transformer and ConvNeXt as base models, and replaced the original classifer with a custom Multi-Layer Perceptron (MLP) outputting 9 classes. <br>
+
+We adopted partial fine-tuning, where most layers were frozen, except for the top few layers and the classifier. Each model had ~ 14 million trainable parameters out of 49 million total.
+
+### Performance Metric
+For Swin Transformer, we noted that the model achieved 96.23% top-1 accuracy, lowest F1 score of 0.9082, and an inference time of 2.516s at batch size = 30 for 720 images. <br>
+
+For ConvNeXt, we noted that the model achieved 95.43% top-1 accuracy, lowest F1 score of 0.8614m and an inference time of 1.882s at batch size = 30 for 720 images.
+
