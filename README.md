@@ -43,6 +43,19 @@ To evaluate model performance, we will use the following metrics:
 </ul>
 
 ## Deep Learning
+### Data Preparation
+<ul>
+  <li> Directory Setup follows the structure as defined in directory_order file. </li>
+  <li> Script: Process Data.ipynb 
+    <li> Splits the dataset into training, validation and test sets with a fixed random seed for reproducibility. </li>
+    <li> Applies offline data augmentation using Albumentations. </li>
+    <li> Saves the processed data into: 
+      <li> Weeds/Sets </li>
+      <li> Weeds/Labels </li>
+    </li>
+</li>
+</ul>
+
 Place the images, labels and ipynb files according to the Directory order file. Process Data splits and augments the data with a set seed and saves the resulting training, validation and test sets in Weeds/Sets and Weeds/Labels. Swin.ipynb and Convnext.ipynb contain the training and evaluation of the Swin Transformer small and Convnext small models respectively. To speed up the process, the entire dataset is loaded into memory so the program will take about 18-20 GB of RAM. The records folder contains the training and validation loss of each epoch of training for the models. The optimal weights for each model is stored on google drive at 
 https://drive.google.com/drive/folders/1KAnvMIL_II11WkVqymGF3nXKtiPBoY2i?usp=drive_link.
 
