@@ -45,33 +45,34 @@ To evaluate model performance, we will use the following metrics:
 ## Deep Learning
 ### Data Preparation
 <ul>
-  <li> The directory structure follows the layout defined in directory_order file. </li>
-  <li> The Process Data.ipybnb file splits the dataset into training, validation, and test sets using a fixed seeed for reproduciblity. </li>
-  <li> Offline data augmentation (Albumentations) is applied during pre-processing. </li>
-  <li> The resulting sets are saved in Weeds/Sets for image data, and Weeds/Labels for class labels. </li>
+  <li> Place the labels and images from the DeepWeeds repository into a folder together with the py files.
+  <li> Process_Data splits and processes the dataset into training, validation, and test sets using a fixed seeed for reproduciblity. </li>
+  <li> Data augmentation (Albumentations) is applied during this. </li>
+  <li> The resulting sets are saved in Folder/Sets for image data, and Folder/Labels for class labels. The folders are automatically created. </li>
 </ul>
 
 ### Model Training & Evaluation
 <ul>
-  <li> Swin.ipynb trains and evaluates the Swin Transformer Small model. </li>
-  <li> Convnext.ipynb trains and evaluates the Convnext Small model. </li>
+  <li> Swin_Training and Convnext_Training train the respective models using Pytorch SGD and cross entropy loss. </li>
+  <li> The best checkpoints are automatically saved to Folder/Models/Folder_name while the summary data is saved to Folder/runs/Folder_name. </li>
+  <li> Evaluation evaluates the best epochs of both the Swin and Convnext models. </li>
+  <li> Training_Functions, Evaluation_Functions, Weeds_Dataset, Convnext_Model and Swin_Model contains the functions and classes needed for the above 3 files to run. </li>
 </ul>
 
-To speed up the process, the full dataset is loaded into memory (~ 18 - 20 GB RAM usage).
-
-### Training Records
-The records/ folder contains training and validation loss for each epoch for both models.
+The entire training/test data is loaded into memory so the training files take about 20 GB RAM while the evaluation file takes about 4 GB RAM.
 
 ### Model Weights
-The optimial trained model weights are stored on Google Drive: https://drive.google.com/drive/folders/1KAnvMIL_II11WkVqymGF3nXKtiPBoY2i?usp=drive_link.
+The optimal trained model weights are stored on Google Drive: https://drive.google.com/drive/folders/1KAnvMIL_II11WkVqymGF3nXKtiPBoY2i?usp=drive_link.
 
 ### Model Setup
 We used pre-trained ImageNet Pytorch implementations of Swin Transformer and ConvNeXt as base models, and replaced the original classifer with a custom Multi-Layer Perceptron (MLP) outputting 9 classes. <br>
 
-We adopted partial fine-tuning, where most layers were frozen, except for the top few layers and the classifier. Each model had ~ 14 million trainable parameters out of 49 million total.
+We adopted partial fine-tuning where the lower layers of the models were frozen. Each model had around 49 million parameters total. Convnext was modified from the original Pytorch implementation with the addition of 3 squeeze and excitation blocks.
 
 ### Performance Metric
-For Swin Transformer, we noted that the model achieved 96.23% top-1 accuracy, lowest F1 score of 0.9082, and an inference time of 2.516s at batch size = 30 for 720 images. <br>
+For Swin Transformer, we noted that the model achieved 97.03% top-1 accuracy, lowest F1 score of 0.9390, and an inference time of 6.403s. <br>
 
-For ConvNeXt, we noted that the model achieved 95.43% top-1 accuracy, lowest F1 score of 0.8614m and an inference time of 1.882s at batch size = 30 for 720 images.
+For ConvNeXt, we noted that the model achieved 95.34% top-1 accuracy, lowest F1 score of 0.8955 and an inference time of 5.176s. <br>
+
+Both timings were done on an NVIDIA RTX 3070 GPU and AMD Ryzen 5 5600X CPU.
 
